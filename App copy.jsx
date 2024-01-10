@@ -1,16 +1,15 @@
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = () => {
       try {
         const response = await axios.get("https://dummyjson.com/products");
-        setProducts(response.data.products);
-        console.log(response);
+        setProducts(response.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -27,7 +26,7 @@ function App() {
             <h2>{product.title}</h2>
             <p>Description: {product.description}</p>
             <p>Price: ${product.price}</p>
-            <img src={product.thumbnail} alt={product.title} />
+            <img src={product.picture} alt={product.title} />
           </div>
         ))}
       </div>
